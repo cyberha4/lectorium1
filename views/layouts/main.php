@@ -18,6 +18,23 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1        )    ; } </script>
+            <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
+            <link href="../css/style.css" rel='stylesheet' type='text/css' />
+            <script src="../js/jquery-1.11.0.min.js"></script>
+            <!--start-smoth-scrolling-->
+            <script type="text/javascript" src="../js/move-top.js"></script>
+            <script type="text/javascript" src="../js/easing.js"></script>
+            <script type="text/javascript">
+                    jQuery(document).ready(function($) {
+                        $(".scroll").click(function(event){     
+                            event.preventDefault();
+                            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                        });
+                    });
+        </script>
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -26,37 +43,44 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Social-Lectorium',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'lecture', 'url' => ['/main/lecture/index']],
-        ['label' => 'scientist', 'url' => ['/scientist/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+    
+    <div class="header-bottom">
+     <div class="fixed-header">
+        <div class="container">
+            <div class="top-menu">
+                    <span class="menu"><img src="images/menu-icon.png" alt="" /></span>
+                    <ul class="nav">
+                        <li><a class="active hvr-bounce-to-right" href="index.html">Мероприятия</a></li>
+                        <li><a href="about.html" class="hvr-bounce-to-right">Ученые</a></li>
+                        
+                    </ul>   
+                    <!-- script for menu -->
+                        <script>
+                        $( "span.menu" ).click(function() {
+                          $( "ul.nav" ).slideToggle( "slow", function() {
+                            // Animation complete.
+                          });
+                        });
+                    </script>
+                    <!-- script for menu -->
+            </div>
+            <script>
+        $(document).ready(function() {
+             var navoffeset=$(".header-bottom").offset().top;
+             $(window).scroll(function(){
+                var scrollpos=$(window).scrollTop(); 
+                if(scrollpos >=navoffeset){
+                    $(".header-bottom").addClass("fixed");
+                }else{
+                    $(".header-bottom").removeClass("fixed");
+                }
+             });
+             
+        });
+        </script>
+        </div>
+     </div>
+     </div>
 
     <div class="container">
         <?= Breadcrumbs::widget([
