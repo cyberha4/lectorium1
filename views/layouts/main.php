@@ -48,11 +48,10 @@ AppAsset::register($this);
      <div class="fixed-header">
         <div class="container">
             <div class="top-menu">
-                    <span class="menu"><img src="images/menu-icon.png" alt="" /></span>
                     <ul class="nav">
-                        <li><a class="active hvr-bounce-to-right" href="index.html">Мероприятия</a></li>
-                        <li><a href="about.html" class="hvr-bounce-to-right">Ученые</a></li>
-                        
+                        <li><a class="active hvr-bounce-to-right" href="/main/lecture">Лекции</a></li>
+                        <li><a href="/scientist/" class="hvr-bounce-to-right">Ученые</a></li>
+                        <li><a href="about.html" class="hvr-bounce-to-right">О нас</a></li>
                     </ul>   
                     <!-- script for menu -->
                         <script>
@@ -65,7 +64,8 @@ AppAsset::register($this);
                     <!-- script for menu -->
             </div>
             <script>
-        $(document).ready(function() {
+            // скрипт, который фиксирует навигационное меню на верху экрана
+        /*$(document).ready(function() {
              var navoffeset=$(".header-bottom").offset().top;
              $(window).scroll(function(){
                 var scrollpos=$(window).scrollTop(); 
@@ -76,7 +76,7 @@ AppAsset::register($this);
                 }
              });
              
-        });
+        });*/
         </script>
         </div>
      </div>
