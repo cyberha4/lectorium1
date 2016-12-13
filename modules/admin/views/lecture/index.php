@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Lecture', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <div class = 'table-responsive'>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -27,10 +26,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'body:ntext',
+            //'body:ntext',
+            
+            [
+                'attribute' => 'body',
+                'value' => function ($model, $key, $index, $column) {
+                    //$value = $column->getDataCellValue($model, $key, $index);
+                    return 123;//substr($model->body, 0, 45) . '...'; 
+                },
+
+            ],
+            [
+                //'filter' => DatePicker::widget([
+                //    'model' => $searchModel,
+                //    'attribute' => 'date_from',
+                //    'attribute2' => 'date_to',
+                //    'type' => DatePicker::TYPE_RANGE,
+                //    'separator' => '-',
+                //    'pluginOptions' => ['format' => 'yyyy-mm-dd']
+                //]),
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+                'options' => ['width' => '250'],
+            ],
             'created_by',
-            'created_at',
-            // 'video_url:url',
+            //'created_at',
+            'video_url:url',
             // 'type',
             // 'status',
             // 'annotation',
@@ -39,5 +60,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    </div>
 </div>

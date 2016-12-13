@@ -6,7 +6,6 @@ use Yii;
 use app\models\Scientist;
 use yii\web\NotFoundHttpException;
 
-
 /**
  * This is the model class for table "lecture".
  *
@@ -44,6 +43,7 @@ class Lecture extends \yii\db\ActiveRecord
             [['created_by'], 'required'],
             [['created_by', 'created_at'], 'integer'],
             [['title'], 'string', 'max' => 255],
+            [['video_url'], 'safe'],
         ];
     }
 
@@ -71,5 +71,21 @@ class Lecture extends \yii\db\ActiveRecord
         } else {
             throw new NotFoundHttpException('The requested post does not exist.');
         }
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord OR $this->isAttributeChanged('video_url')) {
+                //$this->video_url = $this->getOldAttribute('video_url');
+                $array = explode('?v=', $this->video_url);
+                if (isset($array[1])){
+                    $this->video_url = $array[1];
+                }
+                //$this->setPassword($this->newPassword);
+            }
+            return true;
+        }
+        return false;
     }
 }

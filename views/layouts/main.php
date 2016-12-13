@@ -48,10 +48,18 @@ AppAsset::register($this);
      <div class="fixed-header">
         <div class="container">
             <div class="top-menu">
+            <?php
+            $active = $this->context->id;
+            $scientistActive = $lectureActive = '';
+            if ($active == 'scientist')
+                $scientistActive = 'active';
+            elseif($active == 'lecture')
+                $lectureActive = 'active';
+            ?>
                     <ul class="nav">
-                        <li><a class="active hvr-bounce-to-right" href="/main/lecture">Лекции</a></li>
-                        <li><a href="/scientist/" class="hvr-bounce-to-right">Ученые</a></li>
-                        <li><a href="about.html" class="hvr-bounce-to-right">О нас</a></li>
+                        <li><a class="hvr-bounce-to-right <?=$lectureActive ?>" href="/main/lecture">Лекции</a></li>
+                        <li><a href="/scientist/" class="hvr-bounce-to-right <?=$scientistActive ?>">Ученые</a></li>
+                        <li><a href="about.html" class="hvr-bounce-to-right <?=$aboutActive ?>">О нас</a></li>
                     </ul>   
                     <!-- script for menu -->
                         <script>
@@ -87,6 +95,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+            
         <?= $content ?>
     </div>
 </div>

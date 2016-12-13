@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <a href = "http://clearyii2.loc/main/lecture/view?id=<?= $model->id ?>" class = "btn btn-primary">Просмотреть</a>
+        <a href = "/main/lecture/view?id=<?= $model->id ?>" class = "btn btn-primary">Просмотреть</a>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

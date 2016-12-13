@@ -16,7 +16,7 @@ class LectureController extends \yii\web\Controller
     {
         $where = ['status'=>Lecture::STATUS_PUBLISHED,
                  'type'=>Lecture::TYPE_BIOGRAPHY];
-        $where = ArrayHelper::merge($where, Yii::$app->request->get());
+        //$where = ArrayHelper::merge($where, Yii::$app->request->get());
         
         $dataProvider = new ActiveDataProvider([
             'query' => Lecture::find()->where($where)

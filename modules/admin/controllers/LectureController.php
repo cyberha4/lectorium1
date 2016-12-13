@@ -89,6 +89,8 @@ class LectureController extends Controller
     public function actionCreate()
     {
         $model = new lecture();
+        $model->created_at = time();
+        $model->created_by = Yii::$app->user->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

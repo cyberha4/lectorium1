@@ -37,11 +37,13 @@ AdminAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Website', 'url' => '/'],
-        ['label' => 'Scientist', 'url' => ['scientist/index']],
-        ['label' => 'Lecture', 'url' => ['lecture/index']],
-    ];
+    if (!Yii::$app->user->isGuest) {
+        $menuItems = [
+            ['label' => 'Website', 'url' => '/'],
+            ['label' => 'Scientist', 'url' => ['scientist/index']],
+            ['label' => 'Lecture', 'url' => ['lecture/index']],
+        ];
+    }
     if(\Yii::$app->user->can('userManage')) {
         $menuItems[] = ['label' => 'user-admin', 'url' => ['/user/admin']];
     }

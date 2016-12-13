@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Scientist', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <div class = 'table-responsive'>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
@@ -26,22 +25,35 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
     
                 'id',
-                'name',
+                //'name',
+                [
+                    //'filter' => \app\models\Scientist::getStatusesArray(),
+                    'attribute' => 'image',
+                    'value' => function ($model, $key, $index, $column) {
+                        /** @var \app\models\Scientist $model */
+                        $image = '<p><a href="lorem.html"><img src="'.$model->image.'" 
+                                width="50" height="50" alt="lorem"></a></p>';
+                        $name = $model->name;
+                        return $image . $name;
+                    },
+                    'format' => 'html',
+                ],
                 'city',
-                'biography:ntext',
                 'achievements:ntext',
+                [
+                    //'filter' => \app\models\Scientist::getStatusesArray(),
+                    'attribute' => 'biography',
+                    //'value' => 'StatusName',
+                    'options' => ['width' => '250'],
+
+                ],
                 [
                     'filter' => \app\models\Scientist::getStatusesArray(),
                     'attribute' => 'status',
-                    'value' => function ($model, $key, $index, $column) {
-                        /** @var \app\models\Scientist $model */
-                        return $model->getStatusName();
-                    }
+                    'value' => 'StatusName',
                 ],
-                // 'image',
-    
+                
                 ['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>
-    </div>
 </div>
