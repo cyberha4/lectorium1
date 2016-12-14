@@ -10,6 +10,5 @@ $test = $this->params['test'];
 	
 	<?= Html::a(Html::encode($model->name), ['scientist/view', 'id' => $model->id], 
 											['class' => 'profile-link']) ?>
-
 </div>
 

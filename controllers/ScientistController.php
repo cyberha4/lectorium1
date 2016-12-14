@@ -4,12 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Scientist;
-use app\models\ScientistSearch;
+use app\models\ScientistSearchFront;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 use yii\web\UploadedFile;
 use yii\imagine\Image;
@@ -35,14 +36,20 @@ class ScientistController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Scientist::find()->where(['status'=>Scientist::STATUS_ACTIVE]),
-            'pagination' => ['pageSize' => 10],
-        ]);
+        //$dataProvider = new ActiveDataProvider([
+        //    'query' => Scientist::find()->where(['status'=>Scientist:://STATUS_ACTIVE]),
+        //    'pagination' => ['pageSize' => 12],
+        //]);
+       $scientistSearch = new ScientistSearchFront();
+       $array = $scientistSearch->search(Yii::$app->request->queryParams);
+
+
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+             'array' => $array,
+             'scientistSearch' => $scientistSearch,
         ]);
+
     }
 
     /**

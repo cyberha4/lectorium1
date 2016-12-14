@@ -60,6 +60,7 @@ AppAsset::register($this);
                         <li><a class="hvr-bounce-to-right <?=$lectureActive ?>" href="/main/lecture">Лекции</a></li>
                         <li><a href="/scientist/" class="hvr-bounce-to-right <?=$scientistActive ?>">Ученые</a></li>
                         <li><a href="about.html" class="hvr-bounce-to-right <?=$aboutActive ?>">О нас</a></li>
+                        <li class = "right"><a href="/admin/" class="hvr-bounce-to-left">Админка</a></li>
                     </ul>   
                     <!-- script for menu -->
                         <script>

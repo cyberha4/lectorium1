@@ -68,6 +68,11 @@ body a:hover{
 	margin:0 5px;
 }
 
+#Мои_нововведения
+.right {
+    background-color: rgba(1,1,1,0.7);
+}
+
 .header-right {
     text-align: left;
     margin-top: 3%;

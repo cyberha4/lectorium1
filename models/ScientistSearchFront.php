@@ -6,11 +6,13 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Scientist;
+use yii\data\Pagination;
+
 
 /**
- * ScientistSearch represents the model behind the search form about `frontend\models\Scientist`.
+ * ScientistSearchFront represents the model behind the search form about `frontend\models\Scientist`.
  */
-class ScientistSearch extends Scientist
+class ScientistSearchFront extends Scientist
 {
     private $_where;
     public function __construct($where = ['status'=>Scientist::STATUS_ACTIVE], $config = [])
@@ -45,24 +47,10 @@ class ScientistSearch extends Scientist
      */
     public function search($params)
     {
-        $query = Scientist::find()->where($this->_where);
-
-        // add conditions that should always apply here
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => ['pageSize' => 12],
-        ]);
+        $query = Scientist::find()->where(['status' => 1]);
 
         $this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
@@ -74,6 +62,29 @@ class ScientistSearch extends Scientist
             ->andFilterWhere(['like', 'achievements', $this->achievements])
             ->andFilterWhere(['like', 'image', $this->image]);
 
-        return $dataProvider;
+        $countQuery = clone $query;
+        $pages = new Pagination([
+                'totalCount' => $countQuery->count(),
+                'defaultPageSize' => 8,
+                ]);
+        
+
+
+        
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        
+
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return ['pages' => $pages, 'models' => $models];
     }
 }
